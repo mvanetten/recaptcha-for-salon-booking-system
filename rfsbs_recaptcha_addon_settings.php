@@ -2,7 +2,7 @@
 
 /*
 
-  Recaptcha for Salon Booking WordPress to protect from spam abuse.
+  reCAPTCHA for Salon Booking System to protect from spam abuse.
   Copyright (C) 2019  M. van Etten
 
   This program is free software: you can redistribute it and/or modify
@@ -21,28 +21,28 @@
 */
 
 /* add submenu to admin menu and render options on option page */
-add_action( 'admin_menu', 'rafsbw_recaptcha_admin_menu' );
-add_action("admin_init", "rafsbw_recaptcha_display_options");
+add_action( 'admin_menu', 'rfsbs_recaptcha_admin_menu' );
+add_action("admin_init", "rfsbs_recaptcha_display_options");
 
 
 /*
- function : rafsbw_recaptcha_admin_menu
+ function : rfsbs_recaptcha_admin_menu
  description : add submenu page to third party plugin 
  parameters : 
  return : void
 */  
-function rafsbw_recaptcha_admin_menu(  ) {
-    add_submenu_page( 'salon', 'reCAPTCHA','reCAPTCHA', 'manage_options', 'rafsbw-recaptcha-addon-settings', 'rafsbw_recaptcha_addon_settings_page' );
+function rfsbs_recaptcha_admin_menu(  ) {
+    add_submenu_page( 'salon', 'reCAPTCHA','reCAPTCHA', 'manage_options', 'rfsbs-recaptcha-addon-settings', 'rfsbs_recaptcha_addon_settings_page' );
 }
 
 
 /*
- function : rafsbw_recaptcha_addon_settings_page
+ function : rfsbs_recaptcha_addon_settings_page
  description : setting page to add sitekey and privatekey
  parameters : 
  return : void
 */  
-function rafsbw_recaptcha_addon_settings_page(){
+function rfsbs_recaptcha_addon_settings_page(){
 	if(!current_user_can('manage_options')){
 		wp_die(__('You do not have sufficient permissions to access this page.'));
 	}
@@ -79,50 +79,52 @@ function rafsbw_recaptcha_addon_settings_page(){
 
 
 /*
- function : rafsbw_recaptcha_display_options
+ function : rfsbs_recaptcha_display_options
  description : add section, settings field and register settings.
  parameters : 
  return : void
 */
-function rafsbw_recaptcha_display_options(){
-	add_settings_section("header_section", "reCAPTCHA Settings", "rafsbw_recaptcha_display_header_options_content", "recaptcha-options");
-    add_settings_field("rafsbw_recaptcha_sitekey", "SiteKey", "rafsbw_recaptcha_display_sitekey_form_element", "recaptcha-options", "header_section");
-    add_settings_field("rafsbw_recaptcha_privatekey", "PrivateKey", "rafsbw_recaptcha_display_privatekey_form_element", "recaptcha-options", "header_section");
-    register_setting("header_section", "rafsbw_recaptcha_sitekey");
-    register_setting("header_section", "rafsbw_recaptcha_privatekey");
+function rfsbs_recaptcha_display_options(){
+	add_settings_section("header_section", "reCAPTCHA Settings", "rfsbs_recaptcha_display_header_options_content", "recaptcha-options");
+    add_settings_field("rfsbs_recaptcha_sitekey", "SiteKey", "rfsbs_recaptcha_display_sitekey_form_element", "recaptcha-options", "header_section");
+    add_settings_field("rfsbs_recaptcha_privatekey", "PrivateKey", "rfsbs_recaptcha_display_privatekey_form_element", "recaptcha-options", "header_section");
+    register_setting("header_section", "rfsbs_recaptcha_sitekey");
+    register_setting("header_section", "rfsbs_recaptcha_privatekey");
 }
 
 
 /*
- function : rafsbw_recaptcha_display_header_options_content
- description : placeholder for the content of fields.
+ function : rfsbs_recaptcha_display_header_options_content
+ description : placeholder for element fields.
  parameters : 
  return : void
 */
-function rafsbw_recaptcha_display_header_options_content(){echo "";}
+function rfsbs_recaptcha_display_header_options_content(){
+	echo "";
+}
 
 
 /*
- function : rafsbw_recaptcha_display_sitekey_form_element
+ function : rfsbs_recaptcha_display_sitekey_form_element
  description : renders a input field for sitekey element
  parameters : 
  return : void
 */
-function rafsbw_recaptcha_display_sitekey_form_element(){
+function rfsbs_recaptcha_display_sitekey_form_element(){
 	?>
-            <input size=40 type="text" name="rafsbw_recaptcha_sitekey" id="rafsbw_recaptcha_sitekey" value="<?php echo get_option('rafsbw_recaptcha_sitekey'); ?>" />
+            <input size=40 type="text" name="rfsbs_recaptcha_sitekey" id="rfsbs_recaptcha_sitekey" value="<?php echo get_option('rfsbs_recaptcha_sitekey'); ?>" />
 	<?php
 }
 
 
 /*
- function : rafsbw_recaptcha_display_privatekey_form_element
+ function : rfsbs_recaptcha_display_privatekey_form_element
  description : renders a input field for privatekey element
  parameters : 
  return : void
 */
-function rafsbw_recaptcha_display_privatekey_form_element(){
+function rfsbs_recaptcha_display_privatekey_form_element(){
 	?>
-		<input size=40 type="text" name="rafsbw_recaptcha_privatekey" id="rafsbw_recaptcha_privatekey" value="<?php echo get_option('rafsbw_recaptcha_privatekey'); ?>" />
+		<input size=40 type="text" name="rfsbs_recaptcha_privatekey" id="rfsbs_recaptcha_privatekey" value="<?php echo get_option('rfsbs_recaptcha_privatekey'); ?>" />
 	<?php
 }    
