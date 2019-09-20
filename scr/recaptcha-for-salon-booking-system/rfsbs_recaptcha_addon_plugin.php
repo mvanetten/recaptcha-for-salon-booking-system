@@ -3,7 +3,7 @@
 /*
   Plugin Name: reCAPTCHA for Salon Booking System 
   Description: reCAPTCHA for Salon Booking System
-  Version: 1.0.0
+  Version: 1.0.1
   Plugin URI: https://github.com/mvanetten/recaptcha-for-salon-booking-system
   Author: M van Etten 
   	
@@ -54,9 +54,6 @@ add_action('sln.shortcode.summary.dispatchForm.before_booking_creation', 'rfsbs_
 function rfsbs_recaptcha_install(){
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 	
-	$dependencyplugin = ABSPATH . 'wp-content/plugins/salon-booking-system/salon.php';
-	$plugindata = get_plugin_data($dependencyplugin);
-	$majorversion = explode(".",$plugindata['Version']);
 	
 	$rfsbs_errors = array();
 	
@@ -66,16 +63,11 @@ function rfsbs_recaptcha_install(){
 		error_log('Plugin Salon Booking System is not active.',0);
 	}
 
-	/* plugin must be version 3 or heiger */
-	if ($majorversion[0] < 3){
-		$rfsbs_errors[] = 'Plugin version 3 of <a href="https://wordpress.org/plugins/salon-booking-system/">Salon Booking System</a> is required.';
-		error_log('Plugin version 3 of Salon Booking System is required.',0);
-	}
 	
 	/* deactivate plugin if errors are found and create a error */
 	if(count($rfsbs_errors) > 0 ){
 		deactivate_plugins( basename( __FILE__ ) );
-		wp_die('<strong>reCAPTCHA Plugin for Booking Salon Errors: </h1><p>' . implode('\n',$rfsbs_errors).'</p>','' ,  array( 'response'=>200, 'back_link'=>true ) );
+		wp_die('<strong>reCAPTCHA for Salon Booking System Plugin found some errors: </h1><p>' . implode('\r\n',$rfsbs_errors).'</p>','' ,  array( 'response'=>200, 'back_link'=>true ) );
 	}
 	
 
