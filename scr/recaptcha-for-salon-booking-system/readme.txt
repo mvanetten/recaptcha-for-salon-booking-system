@@ -4,7 +4,7 @@ Tags: Salon Booking System, recaptcha, spam
 Requires at least: 4.9
 Requires PHP: 5.6
 Tested up to: 5.2.3
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 

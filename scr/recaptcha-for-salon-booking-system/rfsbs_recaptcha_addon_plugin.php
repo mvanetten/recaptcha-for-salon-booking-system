@@ -3,7 +3,7 @@
 /*
   Plugin Name: reCAPTCHA for Salon Booking System 
   Description: reCAPTCHA for Salon Booking System
-  Version: 1.0.3
+  Version: 1.0.4
   Plugin URI: https://github.com/mvanetten/recaptcha-for-salon-booking-system
   Author: M van Etten 
   	

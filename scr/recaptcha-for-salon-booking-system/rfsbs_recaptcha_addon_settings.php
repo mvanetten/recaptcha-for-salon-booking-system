@@ -88,8 +88,10 @@ function rfsbs_recaptcha_display_options(){
 	add_settings_section("header_section", "reCAPTCHA Settings", "rfsbs_recaptcha_display_header_options_content", "recaptcha-options");
     add_settings_field("rfsbs_recaptcha_sitekey", "SiteKey", "rfsbs_recaptcha_display_sitekey_form_element", "recaptcha-options", "header_section");
     add_settings_field("rfsbs_recaptcha_privatekey", "PrivateKey", "rfsbs_recaptcha_display_privatekey_form_element", "recaptcha-options", "header_section");
-    register_setting("header_section", "rfsbs_recaptcha_sitekey");
-    register_setting("header_section", "rfsbs_recaptcha_privatekey");
+	
+	$args = array('type' => 'string','sanitize_callback' => 'sanitize_text_field','default' => NULL);
+    register_setting("header_section", "rfsbs_recaptcha_sitekey", $args);
+    register_setting("header_section", "rfsbs_recaptcha_privatekey", $args);
 }
 
 
