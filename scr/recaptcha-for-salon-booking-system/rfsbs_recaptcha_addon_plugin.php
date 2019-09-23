@@ -3,7 +3,7 @@
 /*
   Plugin Name: reCAPTCHA for Salon Booking System 
   Description: reCAPTCHA for Salon Booking System
-  Version: 1.0.2
+  Version: 1.0.3
   Plugin URI: https://github.com/mvanetten/recaptcha-for-salon-booking-system
   Author: M van Etten 
   	
@@ -97,10 +97,11 @@ function rfsbs_recaptcha_validate($a)
 function rfsbs_recaptcha_render_recaptcha(){
 	wp_enqueue_script( 'rfsbs_recaptcha_api', 'https://www.google.com/recaptcha/api.js?onload=onloadCallback',true);
 	wp_enqueue_script( 'rfsbs_recaptcha_javascript', plugin_dir_url( __FILE__ ) .'scripts/recaptcha.js',false);
+	$sitekey = sanitize_text_field(get_option('rfsbs_recaptcha_sitekey'));
 	?>
 		<div class='col-xs-12 recaptcha'>
 			<div class='row rfsbs-summary-row'>
-				<div class='g-recaptcha' data-sitekey='<?php echo get_option('rfsbs_recaptcha_sitekey') ?>' data-size='invisible' data-callback='setResponse'></div>
+				<div class='g-recaptcha' data-sitekey='<?php echo $sitekey ?>' data-size='invisible' data-callback='setResponse'></div>
 			</div>
 		</div>
 	<?php
@@ -116,10 +117,11 @@ function rfsbs_recaptcha_render_recaptcha(){
 */  
 function rfsbs_recaptcha_is_valid(){
 	$siteverifyurl = 'https://www.google.com/recaptcha/api/siteverify';
-	$resp_recaptcha = filter_input(INPUT_POST, 'g-recaptcha-response', FILTER_SANITIZE_STRING);
+	$resp_recaptcha = sanitize_text_field($_POST['g-recaptcha-response']);
+	$privatekey = sanitize_text_field(get_option('rfsbs_recaptcha_privatekey'));
 	$response = wp_remote_post( $siteverifyurl, array(
 		'method' => 'POST',
-		'body' => array('secret' => get_option('rfsbs_recaptcha_privatekey'), 'response' => $resp_recaptcha)
+		'body' => array('secret' => $privatekey, 'response' => $resp_recaptcha)
 	));
 	$json = json_decode(wp_remote_retrieve_body($response));
 	if ($json->success == true){

@@ -112,7 +112,7 @@ function rfsbs_recaptcha_display_header_options_content(){
 */
 function rfsbs_recaptcha_display_sitekey_form_element(){
 	?>
-            <input size=40 type="text" name="rfsbs_recaptcha_sitekey" id="rfsbs_recaptcha_sitekey" value="<?php echo get_option('rfsbs_recaptcha_sitekey'); ?>" />
+            <input size=40 type="text" name="rfsbs_recaptcha_sitekey" id="rfsbs_recaptcha_sitekey" value="<?php echo sanitize_text_field(get_option('rfsbs_recaptcha_sitekey')); ?>" />
 	<?php
 }
 
@@ -125,6 +125,6 @@ function rfsbs_recaptcha_display_sitekey_form_element(){
 */
 function rfsbs_recaptcha_display_privatekey_form_element(){
 	?>
-		<input size=40 type="text" name="rfsbs_recaptcha_privatekey" id="rfsbs_recaptcha_privatekey" value="<?php echo get_option('rfsbs_recaptcha_privatekey'); ?>" />
+		<input size=40 type="text" name="rfsbs_recaptcha_privatekey" id="rfsbs_recaptcha_privatekey" value="<?php echo sanitize_text_field(get_option('rfsbs_recaptcha_privatekey')); ?>" />
 	<?php
 }    
